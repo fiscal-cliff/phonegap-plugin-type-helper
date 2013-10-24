@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+           id="cordova.plugin.TypeHelper"
+      version="0.1.0">
+    <name>TypeHelper</name>
+
+    <js-module src="www/TypeHelper.js" name="TypeHelper">
+        <clobbers target="TypeHelper" />
+    </js-module>
+    
+    	<info>
+	This plugin gives you path of file, that's opened with your allpication
+	You should add type handling manually to the android manifest or info.plist
+	</info>
+
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="TypeHelper">
+                <param name="android-package" value="org.apache.cordova.plugin.TypeHelper.TypeHelperPlugin"/>
+            </feature>
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        </config-file>
+
+	<source-file src="src/android/TypeHelperPlugin.java" target-dir="src/org/apache/cordova/plugin/TypeHelper" />
+      
+     </platform>
+     
+     <!-- ios -->
+     <platform name="ios">    
+         <config-file target="config.xml" parent="/*">
+             <feature name="TypeHelper">
+                 <param name="ios-package" value="TypeHelper" />
+             </feature>
+         </config-file>
+
+         <header-file src="src/ios/TypeHelper.h" />
+         <source-file src="src/ios/TypeHelper.m" />
+
+
+     </platform>
+          
+</plugin> 
