@@ -1,22 +1,11 @@
 package org.apache.cordova.plugin.TypeHelper;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Enumeration;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipException;
-import java.util.zip.ZipFile;
-
+import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.apache.cordova.*;
 
-import android.content.Context;
+import android.app.Activity;
 
 /**
  * @author Evgeniy Lukovsky
@@ -39,7 +28,8 @@ public class TypeHelperPlugin extends CordovaPlugin {
 		switch(Action.valueOf(action)){
 		case getFile: result = true;
 			getFile(args, callbackContext);
-		break;
+			break;
+		}
 		return result;
 	}
 
@@ -52,16 +42,12 @@ public class TypeHelperPlugin extends CordovaPlugin {
 		String filePath = null;
 		try {
 			Activity activity = cordova.getActivity();
-			callbackContext.success(absolutePath);
 			filePath = activity.getIntent().getDataString();
+			callbackContext.success(filePath);
 
-		} catch (JSONException e) {
-			System.out.println("JSON exception");
+		} catch (NullPointerException e) {
+			System.out.println("Null pointer exception");
 			System.out.println(e.getMessage());
-			return false;
-		} catch (IOException e3) {
-			System.out.println("IO/ZIP exception");
-			System.out.println(e3.getMessage());
 			return false;
 		}
 		System.out.println("All went fine.");
