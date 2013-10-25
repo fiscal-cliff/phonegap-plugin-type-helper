@@ -8,4 +8,6 @@
 
 - (void)getFile:(CDVInvokedUrlCommand*)command;
 
+@property (strong, nonatomic) NSString *filePath
+
 @end

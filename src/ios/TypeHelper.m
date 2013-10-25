@@ -10,20 +10,27 @@
     CDVPluginResult * pluginResult = nil;
     NSError* error = nil;
     
-    NSString* dirName = [command.arguments objectAtIndex:0];
-    NSString* path = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString* dirPath = [path stringByAppendingPathComponent:dirName];
     
-    NSLog(@"Trying to create directory: %@",dirName);
-    bool isCreated = ![[NSFileManager defaultManager] createDirectoryAtPath:dirPath withIntermediateDirectories:NO attributes:nil error: &error];
     
-    if (isCreated) {
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:dirPath];
+    if (self.filePath != nil) {
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:self.filePath];
         NSLog(@"Success!");
     }else{
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Can't create the directory."];
     }
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
+- (void)handleOpenURL:(NSNotification*)notification
+{
+    // override to handle urls sent to your app
+    // register your url schemes in your App-Info.plist
+
+    NSURL* url = [notification object];
+
+    if ([url isKindOfClass:[NSURL class]]) {
+        self.filePath = [url absoluteString];
+    }
 }
 
 @end
