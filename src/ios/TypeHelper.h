@@ -1,13 +1,11 @@
 
 #import <Cordova/CDV.h>
 
-@interface ExtractZip : CDVPlugin
-{
-    NSString *callbackID;
-}
+@interface TypeHelper : CDVPlugin
 
 - (void)getFile:(CDVInvokedUrlCommand*)command;
+- (void)removeUnusedFiles:(NSString*)except;
 
-@property (strong, nonatomic) NSString *filePath
+@property (strong, nonatomic) NSString *filePath;
 
 @end
