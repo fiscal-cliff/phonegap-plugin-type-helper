@@ -1,4 +1,3 @@
-cordova.define("cordova.plugin.TypeHelper.TypeHelper", function(require, exports, module) {
 /*
  * @author Evgeniy Lukovsky
  * */
@@ -15,4 +14,3 @@ cordova.define("cordova.plugin.TypeHelper.TypeHelper", function(require, exports
 
 	module.exports= new TypeHelper();
 
-});
